@@ -1,67 +1,31 @@
-<!DOCTYPE html>
+{% extends "layout.html" %}
 
-<html lang="en">
+{% block title %}
+    about
+{% endblock %}
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="initial-scale=1, width=device-width">
+{% block main %}
+    <h1>ABOUT</h1>
 
-    <head>
+    <h3><u>Final Project</u>: Displaying Association Between Sentiment of Google Searches and Stock Trajectory of a Company Using Principal Component Analysis</h1>
 
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
-        
-        <link href="/static/styles.css" rel="stylesheet">
-
-        <title>about</title>
-
-    </head>
-
-    <body>
-
-        <!-- Nav Bar -->
-        <nav class="navbar navbar-expand-lg sticky-top">
-            <a class="navbar-brand" href="/">[PCA on Stock Price and Google Search Sentiment]</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/">home <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/about">about</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-
-        <!-- Writing on page -->
-        <div class="writing">
-            <h1>ABOUT</h1>
-
-            <h3><u>Final Project</u>: Displaying Association Between Sentiment of Google Searches and Stock Trajectory of a Company Using Principal Component Analysis</h1>
-
-            <p>
-                Recently, Facebook’s web server crashed due to an error in their Domain Name Service. Immediately afterwards, there was a spike in the number of Google searches for “Facebook,” and the Facebook stock plunged. We aim to determine whether or not there exists a correlation between the popularity of Google searches related to the company and the trajectory of the company’s stock. In particular, we want to examine whether the value of a stock is at all dependent on the positive or negative sentiment of Google searches related to a company.
-            </p>
-            <br>
-            <p>
-                Presumably, when there is a spike in the number of Google searches for a company, the company is doing very well (when many people search up the company to learn about the good news), or poorly, as in this instance for Facebook (when many people search up the company to learn about the bad news). Hence, we predict that when there is a spike in the number of Google searches on a company, there exists a corresponding increase or decrease in the stock trajectory of a company. We also assume that the pos- itive or negative sentiment of the Google searches themselves are indicative of a company’s performance. For instance, if there are a greater number of Google searches associated with a company’s good performance (i.e. “face- book stock up”) compared to the number of Google searches associated with a company’s poor performance (i.e. “facebook stock down”) on a given day, we hypothesize that the company’s stock price would have grown that day. If our hypothesis holds true, the findings from this project may imply that stock trajectory can be predicted by the positive or negative sentiment of Google searches.
-            </p>
-            <br>
-            <p>
-                The potential to predict stocks based on the quantity and sentiment of Google searches on a company inspires the question: Is there a strong correlation between the popularity of Google searches that are emotionally associated with a company’s performance and the unit value of the company’s stock?
-            </p>
-            <br>
-            <p>
-                We can approach this question and determine whether there exists a correlation between the sentiment of Google searches and the trajectory of the stock using Principal Component Analysis (PCA). Principal Component Analysis allows us to reduce the large dimension of the matrix containing the data of the popularity of multiple Google searches related to a company into a lower dimension. Through the use of least-squares, eigenvalues, and orthogonal projections, PCA will enable us to find principal components that can show how closely google searches of a company are related to that company’s stock trajectory.
-            </p>
-            <br>
-            <p>
-                We use Columbia Professor Frank Wood’s lecture on Principle Component Analysis and Jonathon Shlens’ paper “Tutorial on Principle Component Analysis” from University of California, San Diego as our primary sources guiding our execution and interpretation of PCA in relation to a company’s stock trajectory and the popularity of positive or negative Google searches related to that company at a given time.
-            </p>
-        </div>
-
-</body>
+    <p>
+        Recently, Facebook’s web server crashed due to an error in their Domain Name Service. Immediately afterwards, there was a spike in the number of Google searches for “Facebook,” and the Facebook stock plunged. We aim to determine whether or not there exists a correlation between the popularity of Google searches related to the company and the trajectory of the company’s stock. In particular, we want to examine whether the value of a stock is at all dependent on the positive or negative sentiment of Google searches related to a company.
+    </p>
+    <br>
+    <p>
+        Presumably, when there is a spike in the number of Google searches for a company, the company is doing very well (when many people search up the company to learn about the good news), or poorly, as in this instance for Facebook (when many people search up the company to learn about the bad news). Hence, we predict that when there is a spike in the number of Google searches on a company, there exists a corresponding increase or decrease in the stock trajectory of a company. We also assume that the pos- itive or negative sentiment of the Google searches themselves are indicative of a company’s performance. For instance, if there are a greater number of Google searches associated with a company’s good performance (i.e. “face- book stock up”) compared to the number of Google searches associated with a company’s poor performance (i.e. “facebook stock down”) on a given day, we hypothesize that the company’s stock price would have grown that day. If our hypothesis holds true, the findings from this project may imply that stock trajectory can be predicted by the positive or negative sentiment of Google searches.
+    </p>
+    <br>
+    <p>
+        The potential to predict stocks based on the quantity and sentiment of Google searches on a company inspires the question: Is there a strong correlation between the popularity of Google searches that are emotionally associated with a company’s performance and the unit value of the company’s stock?
+    </p>
+    <br>
+    <p>
+        We can approach this question and determine whether there exists a correlation between the sentiment of Google searches and the trajectory of the stock using Principal Component Analysis (PCA). Principal Component Analysis allows us to reduce the large dimension of the matrix containing the data of the popularity of multiple Google searches related to a company into a lower dimension. Through the use of least-squares, eigenvalues, and orthogonal projections, PCA will enable us to find principal components that can show how closely google searches of a company are related to that company’s stock trajectory.
+    </p>
+    <br>
+    <p>
+        We use Columbia Professor Frank Wood’s lecture on Principle Component Analysis and Jonathon Shlens’ paper “Tutorial on Principle Component Analysis” from University of California, San Diego as our primary sources guiding our execution and interpretation of PCA in relation to a company’s stock trajectory and the popularity of positive or negative Google searches related to that company at a given time.
+    </p>
+{% endblock %}

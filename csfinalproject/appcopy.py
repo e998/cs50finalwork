@@ -34,6 +34,7 @@ def index():
     # Download links from Network tab of Developer Tools
     # Source: https://www.reddit.com/r/html5/comments/9f8knj/how_do_i_find_hidden_download_links_on_click_to/
 
+
     neutral = ["facebook", "Facebook", "facebook meta", "facebook meta stock", "facebook stock", "Meta"]
     positive = ["facebook up", "Facebook up", "facebook meta up", "facebook stock up", "Meta up", "facebook increase", "Facebook increase", "Meta increase"]
     negative = ["facebook down", "Facebook down", "facebook meta down", "facebook stock down", "Meta down", "facebook decrease", "Facebook decrease", "Meta decrease"]
@@ -106,8 +107,8 @@ def index():
     for i in range(len_neut):
         url = url_neut[i]
         r = requests.get(url, allow_redirects=True)
-        filename = f'neut{i}.csv'
-        filetemp = f'neut{i}temp.csv'
+        filename = "neut" + str(i) + ".csv"
+        filetemp = "neut" + str(i) + "temp.csv"
         open(filename, "wb").write(r.content)
 
         with open(filename,"r") as f, open(filetemp,"w") as f1:
@@ -120,72 +121,6 @@ def index():
                     daterow = datetime.datetime.strptime(str(row[0]), "%Y-%m-%dT%H")
                     if daterow.weekday() < 5:
                         f1.write(f'{daterow},{row[1]}')
-
-        if i == 0:
-            final_arr_neut = pd.read_csv(filetemp, header=None)
-            final_arr_neut = np.array(final_arr_neut).T
-        else:
-            temp_neut = pd.read_csv(filetemp, header=None)
-            temp_neut = np.array(temp_neut).T[1]
-            final_arr_neut = np.vstack((final_arr_neut, temp_neut))
-
-
-    ### For all positive search terms
-    len_pos = len(positive)
-    for i in range(len_pos):
-        url = url_pos[i]
-        r = requests.get(url, allow_redirects=True)
-        filename = f'pos{i}.csv'
-        filetemp = f'pos{i}temp.csv'
-        open(filename, "wb").write(r.content)
-
-        with open(filename,"r") as f, open(filetemp,"w") as f1:
-            for j in range(3):
-                next(f) # skip header lines
-            for line in f:
-                # Only hours that stock market is open
-                if ("T10," in line) or ("T11," in line) or ("T12," in line) or ("T13," in line) or ("T14," in line) or ("T15," in line) or ("T16," in line):
-                    row = line.split(',')
-                    daterow = datetime.datetime.strptime(str(row[0]), "%Y-%m-%dT%H")
-                    if daterow.weekday() < 5:
-                        f1.write(f'{daterow},{row[1]}')
-        
-        if i == 0:
-            final_arr_pos = pd.read_csv(filetemp, header=None)
-            final_arr_pos = np.array(final_arr_pos).T
-        else:
-            temp_pos = pd.read_csv(filetemp, header=None)
-            temp_pos = np.array(temp_pos).T[1]
-            final_arr_pos = np.vstack((final_arr_pos, temp_pos))
-
-
-    ### For all negative search terms
-    len_neg = len(negative)
-    for i in range(len_neg):
-        url = url_neg[i]
-        r = requests.get(url, allow_redirects=True)
-        filename = f'neg{i}.csv'
-        filetemp = f'neg{i}temp.csv'
-        open(filename, "wb").write(r.content)
-
-        with open(filename,"r") as f, open(filetemp,"w") as f1:
-            for j in range(3):
-                next(f) # skip header lines
-            for line in f:
-                # Only hours that stock market is open
-                if ("T10," in line) or ("T11," in line) or ("T12," in line) or ("T13," in line) or ("T14," in line) or ("T15," in line) or ("T16," in line):
-                    row = line.split(',')
-                    daterow = datetime.datetime.strptime(str(row[0]), "%Y-%m-%dT%H")
-                    if daterow.weekday() < 5:
-                        f1.write(f'{daterow},{row[1]}')
-
-        if i == 0:
-            final_arr_neg = pd.read_csv(filetemp, header=None)
-            final_arr_neg = np.array(final_arr_neg).T
-        else:
-            temp_neg = pd.read_csv(filetemp, header=None)
-            temp_neg = np.array(temp_neg).T[1]
-            final_arr_neg = np.vstack((final_arr_neg, temp_neg))
 
         # with open(filetemp,"r") as f, open("final.csv","a") as f1:
         #     csv_reader = csv.reader(f, delimiter=",")
@@ -197,19 +132,18 @@ def index():
 
         # https://www.nasdaq.com/market-activity/stocks/fb/advanced-charting?timeframe=5D
 
-        # if i == 0:
-        #     final_arr = pd.read_csv(filetemp, header=None)
-        #     final_arr = np.array(final_arr).T
-        # else:
-        #     temp = pd.read_csv(filetemp, header=None)
-        #     temp = np.array(temp).T[1]
-        #     final_arr = np.vstack((final_arr, temp))
+        if i == 0:
+            final_arr = pd.read_csv(filetemp, header=None)
+            final_arr = np.array(final_arr).T
+        else:
+            temp = pd.read_csv(filetemp, header=None)
+            temp = np.array(temp).T[1]
+            final_arr = np.vstack((final_arr, temp))
 
     # Source: https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.to_html.html
     # reshape takes matrix of given dimension and remakes it to fit given whatever first dimension I gave it
-    searchterms = [" "] + neutral + positive + negative
-    target = np.array(["target"] + ["neutral"]*len_neut + ["positive"]*len_pos + ["negative"]*len_neg).reshape(-1, 1)
-    final_arr = np.vstack((final_arr_neut, final_arr_pos, final_arr_neg))
+    searchterms = [" "] + neutral
+    target = np.array(["target"] + ["neutral"]*len_neut).reshape(-1, 1)
     final_arr = np.hstack((final_arr, target))
 
     pd.DataFrame(final_arr, index=searchterms).to_csv("final.csv")

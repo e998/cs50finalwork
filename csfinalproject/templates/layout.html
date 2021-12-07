@@ -21,43 +21,50 @@
 
         <!-- Nav Bar -->
         <nav class="navbar navbar-expand-lg sticky-top">
-            <a class="navbar-brand" href="index.html">[PCA on Stock Price and Google Search Sentiment]</a>
+            <a class="navbar-brand" href="/">[PCA on Stock Price and Google Search Sentiment]</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="index.html">home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="/">home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="about.html">about</a>
+                        <a class="nav-link" href="/about">about</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            days
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="/day1">day 1</a>
+                            <a class="dropdown-item" href="/day2">day 2</a>
+                            <a class="dropdown-item" href="/day3">day 3</a>
+                            <a class="dropdown-item" href="/day4">day 4</a>
+                            <a class="dropdown-item" href="/day5">day 5</a>
+                        </div>
                     </li>
                 </ul>
             </div>
         </nav>
 
-        <!-- Writing on page -->
-        <div class="writing">
-            <h1>Displaying Association Between Sentiment of Google Searches and Stock Trajectory of a Company Using Principal Component Analysis</h1>
-        </div>
-
-        <!-- {% if get_flashed_messages() %}
+        {% if get_flashed_messages() %}
             <header>
                 <div class="alert alert-primary mb-0 text-center" role="alert">
                     {{ get_flashed_messages() | join(" ") }}
                 </div>
             </header>
-        {% endif %} -->
+        {% endif %}
 
-        <!-- {% block main %}{% endblock %} -->
-
-        <!-- <main class="container-fluid py-5 text-center">
-            {% block main %}{% endblock %}
-        </main> -->
+        <main class="container-fluid py-5 text-left">
+            <div class="page">
+                {% block main %}{% endblock %}
+            </div>
+        </main>
 
         <footer class="mb-5 small text-center text-muted">
-            Data provided by <a href="https://trends.google.com/trends/?geo=US">Google Trends</a> and <a href="https://www.google.com/finance/">Google Finance</a>
+            Data provided by <a href="https://trends.google.com/trends/?geo=US">Google Trends</a> and <a href="https://www.nasdaq.com/market-activity/stocks/fb/advanced-charting?timeframe=5D">NASDAQ</a>
         </footer>
 
     </body>

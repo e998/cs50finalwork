@@ -1,5 +1,5 @@
 body {
-    padding-bottom: 70px;
+    padding-bottom: 50px;
     font-family: "Andale Mono", monospace;
   }
   
@@ -15,10 +15,9 @@ body {
       margin-right: auto;
   }
   
-  .writing {
-    padding-top: 50px;
-    padding-left: 50px;
-    padding-right: 50px;
+  .page {
+    padding-left: 30px;
+    padding-right: 30px;
   }
   
   h1 {
